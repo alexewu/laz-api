@@ -22,5 +22,34 @@ class Database{
  
         return $this->conn;
     }
+
+    public function setup(){
+
+        $stmt = $this->conn->prepare($query);
+    
+        // execute query
+        $stmt->execute("CREATE TABLE Students(
+            SID INTEGER,
+            First_Name VARCHAR2(100) NOT NULL,
+            Last_Name VARCHAR2(100) NOT NULL,
+            Password VARCHAR2(100) NOT NULL,
+            Added VARCHAR2(100) NOT NULL,
+            Removed VARCHAR2(100).
+            PRIMARY KEY(SID)
+        )");
+        
+        $stmt->execute("CREATE TRIGGER add_Student
+            BEFORE INSERT ON Students
+            FOR EACH ROW
+            BEGIN
+                SELECT NOW() INTO :NEW.Added;
+            END");
+        
+        $stmt->execute("INSERT INTO Students(SID, First_Name, Last_Name, Password) VALUES(
+            (1, 'Alexander', 'Huang', 'password'),
+            (2, 'Alexandra', 'Wu', 'thisMaHsecurePassWORD'),
+            (3, 'Aadhar', 'Agarwal', 'bosco_sticks')
+        )");
+    }
 }
 ?>

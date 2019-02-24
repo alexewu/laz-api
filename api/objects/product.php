@@ -20,24 +20,8 @@ class Product{
 
     // read products
     function read(){
-    
-        // select all query
-        $query = "SELECT
-                    c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
-                FROM
-                    " . $this->table_name . " p
-                    LEFT JOIN
-                        categories c
-                            ON p.category_id = c.id
-                ORDER BY
-                    p.created DESC";
-    
-        // prepare query statement
+        $query = "SELECT * FROM Students";
         $stmt = $this->conn->prepare($query);
-    
-        // execute query
-        $stmt->execute();
-    
-        return $stmt;
+        return $stmt->execute($query);
     }
 }
